@@ -14,12 +14,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       otp: {
         type: DataTypes.BIGINT,
       },
-      password: {
-        type: DataTypes.STRING,
-      },
-      token: {
-        type: DataTypes.STRING(1000),
-      },
       isDelete: {
         type: DataTypes.BOOLEAN,
         allowNull: true,

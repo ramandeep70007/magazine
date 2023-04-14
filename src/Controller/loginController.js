@@ -9,30 +9,29 @@ const Login = async (req, res) => {
       console.log("Please provide all the values");
       res.send({ msg: "Please provide all the values" });
     }
-    const User = await veryfiemail.findOne({
+    const User = await registeruser.findOne({
       where: { email: rest.email },
     });
+    console.log('user',User);
     if (!User) {
       res.send({ msg: "User is not Registered" });
     }
-    const userRole = await registeruser.findOne({
-        where: { email: User.email },
-      });
+    //compare password
     const compare = await comparePassword(rest.password, User.password);
     if (!compare) {
       res.send({ success: false, message: "email and passwords do not match" });
     } else {
       const token = await createJWT(User);
       console.log("user", token);
-      const user = await veryfiemail.upsert(
+      const user = await registeruser.upsert(
         {
           email: User.email,
           token: token,
         },
         { email: User.email }
       );
-      console.log(`${userRole.role} has login`);
-      res.status(200).json({ msg: `${userRole.role} has login `, data: token });
+      console.log(`${User.role} has login`);
+      res.status(200).json({ msg: `${User.role} has login `, data: token });
     }
   } catch (err) {
     console.log(err);

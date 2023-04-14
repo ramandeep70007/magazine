@@ -15,7 +15,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser())
+app.use("/profile", express.static("upload"));
 const connection = require('./src/config/dbConnection')
+require('./src/Middleware/multer')(app)
 require('./Router')(app)
 router.use((req, res, next) => {
     console.log('Time:', Date.now())
@@ -25,6 +27,7 @@ router.use((req, res, next) => {
 app.get('/',(req,res)=>{
     res.json(`MAGAZINE `)
 })
+
 server.listen(port,()=>{
     console.log(`server is connected ${port}`);
 })

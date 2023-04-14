@@ -17,6 +17,19 @@ const createJWT = async (user) => {
   }
 };
 
+const VerifyJWT = async (req,res) => {
+    const {token,JWT_SECRET}=req.body;
+    try{
+        const decode = jwt.verify(token, JWT_SECRET);
+        console.log('data',decode);
+        res.status(200).json({msg:'jwt verify successfull',data:decode})
+    }catch(err){
+        console.log(err);
+        res.status(500).send({msg:'JWT is not verify',err})
+    }
+}
+
 module.exports = {
   createJWT,
+  VerifyJWT
 };

@@ -1,5 +1,6 @@
 const express =require('express')
 const router =express.Router()
+require('dotenv').config()
 const app =express();
 const path = require('path');
 const ejs=require('ejs')
@@ -15,9 +16,9 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser())
-app.use("/profile", express.static("upload"));
+//app.use("/profile", express.static("upload"));
+require('./src/Middleware/fileUpload')(app);
 const connection = require('./src/config/dbConnection')
-require('./src/Middleware/multer')(app)
 require('./Router')(app)
 router.use((req, res, next) => {
     console.log('Time:', Date.now())

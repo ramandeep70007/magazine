@@ -12,10 +12,9 @@ const Login = async (req, res) => {
     const User = await registeruser.findOne({
       where: { email: rest.email },
     });
-    console.log('user',User);
-    if (!User) {
-      res.send({ msg: "User is not Registered" });
-    }
+    if (User == null || User == undefined) {
+      res.json({ msg: "no data found" });
+    }else{
     //compare password
     const compare = await comparePassword(rest.password, User.password);
     if (!compare) {
@@ -33,6 +32,7 @@ const Login = async (req, res) => {
       console.log(`${User.role} has login`);
       res.status(200).json({ msg: `${User.role} has login `, data: token });
     }
+  }
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "something went wrong", err });

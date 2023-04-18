@@ -1,18 +1,21 @@
 const nodemailer = require("nodemailer");
 const { veryfiemail } = require("../config/dbConnection");
+const { generateOtp } = require("./GenerateOtp");
 
 const sendMail = async (req, res) => {
   try {
-    const { email, otp } = req.body;
+    const { email } = req.body;
+const Otp = await generateOtp()
+
     const user = await veryfiemail.upsert(
       {
           email: email,
-          otp: otp
+          otp: Otp
       },
       { email: email }
     )
     console.log('user',user);
-    console.log("otp", otp, "email", email);
+    console.log("otp", Otp, "email", email);
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
@@ -28,7 +31,7 @@ const sendMail = async (req, res) => {
       to: email,
       subject: "For veryfi email...",
       Text: "First Email send from nodejs nodemailer own made Package ( for auto emails of banking)",
-      html: `<p>please veryfi your email ${otp}`,
+      html: `<p>please veryfi your email ${Otp}`,
     };
     transporter.sendMail(mailOptions, function (err, info) {
       if (err) {

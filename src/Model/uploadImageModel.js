@@ -10,10 +10,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
       comment: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(5000),
       },
       description: {
-        type: DataTypes.STRING,
+        type: DataTypes.STRING(5000),
       },
       isDelete: {
         type: DataTypes.BOOLEAN,

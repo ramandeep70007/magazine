@@ -6,7 +6,7 @@ const Login = async (req, res) => {
   const { ...rest } = req.body;
   try {
     if (!rest.email || !rest.password) {
-      console.log("Please provide all the values");
+    // console.log("Please provide all the values");
       res.send({ msg: "Please provide all the values" });
     }
     const User = await registeruser.findOne({
@@ -21,7 +21,7 @@ const Login = async (req, res) => {
       res.send({ success: false, message: "email and passwords do not match" });
     } else {
       const token = await createJWT(User);
-      console.log("user", token);
+     // console.log("user", token);
       const user = await registeruser.upsert(
         {
           email: User.email,
@@ -29,7 +29,7 @@ const Login = async (req, res) => {
         },
         { email: User.email }
       );
-      console.log(`${User.role} has login`);
+     // console.log(`${User.role} has login`);
       res.status(200).json({ msg: `${User.role} has login `, data: token });
     }
   }

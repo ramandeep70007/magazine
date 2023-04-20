@@ -7,7 +7,7 @@ const generateOtp = async (req, res) => {
     upperCaseAlphabets: false,
     specialChars: false,
   });
-  console.log(OTP);
+  //console.log(OTP);
   //res.send({ msg: "send otp succesfully", data: OTP });
   return OTP;
 };

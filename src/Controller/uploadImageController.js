@@ -1,10 +1,12 @@
 const { imageupload } = require("../config/dbConnection");
+const { QueryTypes } = require("sequelize");
+const db = require("../config/dbConnection");
 
 const uploadImage = async (req, res) => {
-  console.log("api data...", req.body);
+  //console.log("api data...", req.body);
   try {
     const uploadData = await imageupload.create(req.body);
-    console.log("data", uploadData);
+    //console.log("data", uploadData);
     res.status(200).json({ msg: `data upload successfully`, data: uploadData });
   } catch (err) {
     console.log(err);
@@ -14,7 +16,7 @@ const uploadImage = async (req, res) => {
 
 const updateImage = async (req, res) => {
   const { ...rest } = req.body;
-  console.log("api data ...", rest);
+ // console.log("api data ...", rest);
   const data = {
     image: rest.image,
     comment: rest.comment,
@@ -26,7 +28,7 @@ const updateImage = async (req, res) => {
         image: rest.Image,
       },
     });
-    console.log("data", update);
+   // console.log("data", update);
     res.status(200).json({ msg: `update data successfully`, data: update });
   } catch (err) {
     console.log();
@@ -36,7 +38,7 @@ const updateImage = async (req, res) => {
 const deleteImage = async (req, res) => {
   const { ...rest } = req.body;
   try {
-    console.log("api data ...", rest);
+   // console.log("api data ...", rest);
     const data = {
       isDelete: true,
     };
@@ -45,7 +47,7 @@ const deleteImage = async (req, res) => {
         image: rest.image,
       },
     });
-    console.log(imageDelete);
+   // console.log(imageDelete);
     res
       .status(200)
       .json({ msg: "image have status change", data: imageDelete });
@@ -64,7 +66,7 @@ const getImageById = async (req, res) => {
         isDelete: false,
       },
     });
-    console.log("data", getDataById);
+    //console.log("data", getDataById);
     res.status(200).json({ msg: "data get by id", data: getDataById });
   } catch (err) {
     console.log(err);
@@ -81,7 +83,7 @@ const getDataByUserId = async (req, res) => {
         isDelete: false,
       },
     });
-    console.log("data", getUserdata);
+   // console.log("data", getUserdata);
     res
       .status(200)
       .json({ msg: `data get by user id..${rest.userId}`, data: getUserdata });
@@ -98,13 +100,29 @@ const getDataAll = async (req, res) => {
         isDelete: false,
       },
     });
-    console.log("data", allData);
+   // console.log("data", allData);
     res.status(200).json({ msg: "data get successfully", data: allData });
   } catch (err) {
     console.log(err);
     res.status(500).json({ msg: "data not find.. ", err });
   }
 };
+
+const  userDetails = async (req,res) =>{
+  try{
+const getData =await db.sequelize.query(`select r.email,r.fullname,r.phone,r.user_id,i.image,
+i.comment,i.description from registerusers r 
+inner join imageuploads i on i.userId =r.user_id 
+where r.status='active' && r.isDelete =false  && i.isDelete =false 
+`, { 
+  type: QueryTypes.SELECT,
+})
+res.status(200).json({ msg: "get attendance all", data: getData });
+  }catch(err){
+    console.log(err);
+    res.status(500).json({msg:'some thing went wrong',err})
+  }
+}
 
 module.exports = {
   uploadImage,
@@ -113,4 +131,5 @@ module.exports = {
   getImageById,
   getDataByUserId,
   getDataAll,
+  userDetails
 };

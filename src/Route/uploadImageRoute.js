@@ -5,6 +5,7 @@ const {
   getImageById,
   getDataByUserId,
   getDataAll,
+  userDetails,
 } = require("../Controller/uploadImageController");
 
 module.exports = (app) => {
@@ -14,4 +15,5 @@ module.exports = (app) => {
   app.get("/getImageById", (req, res) => getImageById(req, res));
   app.get("/getDataByUserId", (req, res) => getDataByUserId(req, res));
   app.get("/getDataAll", (req, res) => getDataAll(req, res));
+  app.get("/userDetails", (req, res) => userDetails(req, res));
 };

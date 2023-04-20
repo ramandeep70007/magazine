@@ -1,9 +1,8 @@
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const Config = require('../config/Config')
-module.exports =(app)=>{
-
+const Config = require("../config/Config");
+module.exports = (app) => {
   let filestorageEngine = multer.diskStorage({
     destination: "upload",
 
@@ -11,13 +10,13 @@ module.exports =(app)=>{
       cb(null, file.fieldname + Date.now() + path.extname(file.originalname));
     },
   });
-const upload = multer({ storage: filestorageEngine })
+  const upload = multer({ storage: filestorageEngine });
   app.post("/uploads", upload.array("file", 4), async (req, res) => {
     let base_url = Config.basePort;
     let doc_url = req.files
       ? req.files.map((i) => `${base_url}/profile/${i.filename}`)
       : [];
-  console.log('doc_url',doc_url);
-    return res.json({ status: "suceess",message:"data upload sucessfully", url: doc_url });
+   // return doc_url;
+   return res.json({ status: "suceess",message:"data upload sucessfully", url: doc_url });
   });
-}
+};

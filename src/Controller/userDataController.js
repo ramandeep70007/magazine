@@ -9,7 +9,7 @@ const allUserData = async (req, res) => {
       },
       attributes: ["fullname", "phone", "email", "role", "status",'user_id'],
     });
-    console.log("data", data);
+  // console.log("data", data);
     res.status(200).json({ msg: `All user data is ...`, data: data });
   } catch (err) {
     console.log(err);
@@ -39,7 +39,7 @@ const allEmployeeData = async (req, res) => {
 
 const userDataByuserId = async (req, res) => {
   const userId = req.query.user_id;
-  console.log("userId", userId);
+  //console.log("userId", userId);
   try {
     const data = await registeruser.findOne({
       where: {
@@ -48,7 +48,7 @@ const userDataByuserId = async (req, res) => {
       },
       attributes: ["fullname", "phone", "email", "role", "status"],
     });
-    console.log("data", data);
+    //console.log("data", data);
     res.status(200).json({ msg: `user data is ${userId}`, data: data });
   } catch (err) {
     console.log(err);

@@ -14,8 +14,8 @@ const Otp = await generateOtp()
       },
       { email: email }
     )
-    console.log('user',user);
-    console.log("otp", Otp, "email", email);
+    //console.log('user',user);
+    //console.log("otp", Otp, "email", email);
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,

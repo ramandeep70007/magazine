@@ -13,7 +13,7 @@ const register = async (req, res) => {
       !rest.fullname ||
       !rest.phone
     ) {
-      console.log("Please provide all the values");
+     // console.log("Please provide all the values");
       res.send({ msg: "Please provide all the values" });
     }
 
@@ -23,7 +23,7 @@ const register = async (req, res) => {
         email: rest.email,
       },
     });
-    console.log("otp", userOtp.otp);
+  //  console.log("otp", userOtp.otp);
 
     if (rest.otp !== userOtp.otp) {
       res.send({ msg: "incorrect otp" });
@@ -34,7 +34,7 @@ const register = async (req, res) => {
         email: rest.email,
       },
     });
-    console.log("useremail", userEmail);
+   // console.log("useremail", userEmail);
     if (userEmail == null || userEmail == undefined) {
       //hash Password
       const hashPass = await hashPassword(rest.password);
@@ -46,7 +46,7 @@ const register = async (req, res) => {
         fullname: rest.fullname,
         phone: rest.phone,
       });
-      console.log("data", userInsert);
+     // console.log("data", userInsert);
       res.status(200).json({ msg: "register successfully", data: userInsert });
     } else if (userEmail.email === rest.email) {
       res.send({ msg: "user already exit" });

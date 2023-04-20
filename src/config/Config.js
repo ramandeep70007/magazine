@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { PORT,mysql_port,database_name,user,password,basePort} = process.env;
+const { PORT,mysql_port,database_name,user,password,basePort,JWT_SECRET} = process.env;
 
 module.exports = {
   PORT: PORT,
@@ -7,5 +7,6 @@ module.exports = {
   database_name:database_name,
   user:user,
   password:password,
-  basePort:basePort
+  basePort:basePort,
+  JWT_SECRET:JWT_SECRET
 };

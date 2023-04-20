@@ -5,7 +5,7 @@ const updatePassword = async (req, res) => {
   const { ...rest } = req.body;
   try {
     if (!rest.email || !rest.password || !rest.otp) {
-      console.log("Please provide all the values");
+    //  console.log("Please provide all the values");
       res.send({ msg: "Please provide all the values" });
     }
     const userOtp = await veryfiemail.findOne({
@@ -13,7 +13,7 @@ const updatePassword = async (req, res) => {
         email: rest.email,
       },
     });
-    console.log("otp", userOtp.otp);
+   // console.log("otp", userOtp.otp);
 
     if (rest.otp !== userOtp.otp) {
       res.send({ msg: "incorrect otp" });
@@ -28,7 +28,7 @@ const updatePassword = async (req, res) => {
       },
       { email: rest.email }
     );
-    console.log("user", user);
+   // console.log("user", user);
     res.status(200).json({ msg: "update password successfully", data: user });
     }
   } catch (err) {

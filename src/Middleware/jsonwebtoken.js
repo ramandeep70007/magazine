@@ -1,15 +1,15 @@
 const jwt = require("jsonwebtoken");
+const Config =require('../config/Config')
 
 const createJWT = async (user) => {
-  const JWT_SECRET = "prince12";
   const data = {
     user_id: user.user_id,
     email: user.email,
     password: user.password,
   };
-  console.log('data',data);
+ // console.log('data',data);
   try {
-    return jwt.sign({ data: data }, JWT_SECRET,{
+    return jwt.sign({ data: data }, Config.JWT_SECRET,{
         expiresIn: 86400 // 24 hours
       });
   } catch (error) {
@@ -18,10 +18,10 @@ const createJWT = async (user) => {
 };
 
 const VerifyJWT = async (req,res) => {
-    const {token,JWT_SECRET}=req.body;
+    const {token}=req.body;
     try{
-        const decode = jwt.verify(token, JWT_SECRET);
-        console.log('data',decode);
+        const decode = jwt.verify(token, Config.JWT_SECRET);
+      //  console.log('data',decode);
         res.status(200).json({msg:'jwt verify successfull',data:decode})
     }catch(err){
         console.log(err);

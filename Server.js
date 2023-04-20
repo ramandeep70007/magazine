@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(express.json());
 app.use(cors());
 app.use(cookieParser())
-//app.use("/profile", express.static("upload"));
+app.use("/profile", express.static("upload"));
 require('./src/Middleware/fileUpload')(app);
 const connection = require('./src/config/dbConnection')
 require('./Router')(app)

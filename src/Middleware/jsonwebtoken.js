@@ -21,8 +21,15 @@ const VerifyJWT = async (req,res) => {
     const {token}=req.body;
     try{
         const decode = jwt.verify(token, Config.JWT_SECRET);
-      //  console.log('data',decode);
-        res.status(200).json({msg:'jwt verify successfull',data:decode})
+
+        let result ={
+          user_id:decode.data.user_id,
+          email:decode.data.email,
+          iat:decode.iat,
+          exp:decode.exp
+        }
+       // console.log('data',result);
+        res.status(200).json({msg:'jwt verify successfull',data:result})
     }catch(err){
         console.log(err);
         res.status(500).send({msg:'JWT is not verify',err})

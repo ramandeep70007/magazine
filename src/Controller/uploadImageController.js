@@ -25,7 +25,7 @@ const updateImage = async (req, res) => {
   try {
     const update = await imageupload.update(data, {
       where: {
-        image: rest.Image,
+        image: req.query.image,
       },
     });
    // console.log("data", update);
@@ -58,7 +58,8 @@ const deleteImage = async (req, res) => {
 };
 
 const getImageById = async (req, res) => {
-  const { ...rest } = req.body;
+  const { ...rest } = req.query;
+  console.log('rest',rest);
   try {
     const getDataById = await imageupload.findOne({
       where: {
@@ -83,7 +84,7 @@ const getDataByUserId = async (req, res) => {
         isDelete: false,
       },
     });
-   // console.log("data", getUserdata);
+  
     res
       .status(200)
       .json({ msg: `data get by user id..${rest.userId}`, data: getUserdata });

@@ -7,9 +7,9 @@ const allUserData = async (req, res) => {
         role: "User",
         isDelete: false,
       },
-      attributes: ["fullname", "phone", "email", "role", "status",'user_id'],
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
     });
-  // console.log("data", data);
+    // console.log("data", data);
     res.status(200).json({ msg: `All user data is ...`, data: data });
   } catch (err) {
     console.log(err);
@@ -24,16 +24,14 @@ const allEmployeeData = async (req, res) => {
         role: "Employee",
         isDelete: false,
       },
-      attributes: ["fullname", "phone", "email", "role", "status",'user_id'],
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
     });
     res
       .status(200)
       .json({ msg: `all Employee Data is...`, data: EmployeeData });
   } catch (err) {
     console.log(err);
-    res
-      .status(500)
-      .json({ msg: `all Employee Data is ...`, data: EmployeeData });
+    res.status(500).json({ msg: `all Employee Data is ...`, err });
   }
 };
 
@@ -56,99 +54,112 @@ const userDataByuserId = async (req, res) => {
   }
 };
 
-const allActiveData = async (req,res)=>{
-    try{
-const activeData = await registeruser.findAll({
-    where: {
+const allActiveData = async (req, res) => {
+  try {
+    const activeData = await registeruser.findAll({
+      where: {
         status: "active",
         isDelete: false,
       },
-})
-res.status(200).json({msg:`all Active Data is...`,data:activeData})
-    }catch(err){
-        console.log(err);
-        res.status(500).json({msg:`all Active Data not found `,err})
-    }
-}
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
+    });
+    res.status(200).json({ msg: `all Active Data is...`, data: activeData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: `all Active Data not found `, err });
+  }
+};
 
-const allActiveDataUser = async (req,res)=>{
-    try{
-const activeData = await registeruser.findAll({
-    where: {
+const allActiveDataUser = async (req, res) => {
+  try {
+    const activeData = await registeruser.findAll({
+      where: {
         role: "User",
         status: "active",
         isDelete: false,
       },
-})
-res.status(200).json({msg:`all Active Data is...`,data:activeData})
-    }catch(err){
-        console.log(err);
-        res.status(500).json({msg:`all Active Data not found `,err})
-    }
-}
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
+    });
+    res.status(200).json({ msg: `all Active Data is...`, data: activeData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: `all Active Data not found `, err });
+  }
+};
 
-const allActiveDataEmployee = async (req,res)=>{
-    try{
-const activeData = await registeruser.findAll({
-    where: {
+const allActiveDataEmployee = async (req, res) => {
+  try {
+    const activeData = await registeruser.findAll({
+      where: {
         role: "Employee",
         status: "active",
         isDelete: false,
       },
-})
-res.status(200).json({msg:`all Active Data is...`,data:activeData})
-    }catch(err){
-        console.log(err);
-        res.status(500).json({msg:`all Active Data not found `,err})
-    }
-}
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
+    });
+    res.status(200).json({ msg: `all Active Data is...`, data: activeData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: `all Active Data not found `, err });
+  }
+};
 
-const allInActiveData = async (req,res)=>{
-    try{
-const InactiveData = await registeruser.findAll({
-    where: {
-        status: 'inActive',
+const allInActiveData = async (req, res) => {
+  try {
+    const InactiveData = await registeruser.findAll({
+      where: {
+        status: "inActive",
         isDelete: false,
       },
-})
-res.status(200).json({msg:`all InActive Data is...`,data:InactiveData})
-    }catch(err){
-        console.log(err);
-        res.status(500).json({msg:`all InActive Data not found `,err})
-    }
-}
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
+    });
+    res
+      .status(200)
+      .json({ msg: `all InActive Data is...`, data: InactiveData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: `all InActive Data not found `, err });
+  }
+};
 
-const allInActiveDataUser = async (req,res)=>{
-    try{
-const InactiveData = await registeruser.findAll({
-    where: {
+const allInActiveDataUser = async (req, res) => {
+  try {
+    const InactiveData = await registeruser.findAll({
+      where: {
         role: "User",
-        status: 'inActive',
+        status: "inActive",
         isDelete: false,
       },
-})
-res.status(200).json({msg:`all InActive User Data is...`,data:InactiveData})
-    }catch(err){
-        console.log(err);
-        res.status(500).json({msg:`all InActive User Data not found `,err})
-    }
-}
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
+    });
+    res
+      .status(200)
+      .json({ msg: `all InActive User Data is...`, data: InactiveData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: `all InActive User Data not found `, err });
+  }
+};
 
-const allInActiveDataEmployee = async (req,res)=>{
-    try{
-const InactiveData = await registeruser.findAll({
-    where: {
+const allInActiveDataEmployee = async (req, res) => {
+  try {
+    const InactiveData = await registeruser.findAll({
+      where: {
         role: "Employee",
-        status: 'inActive',
+        status: "inActive",
         isDelete: false,
       },
-})
-res.status(200).json({msg:`all InActive Employee Data is...`,data:InactiveData})
-    }catch(err){
-        console.log(err);
-        res.status(500).json({msg:`all InActive Employee Data not found `,err})
-    }
-}
+      attributes: ["fullname", "phone", "email", "role", "status", "user_id"],
+    });
+    res
+      .status(200)
+      .json({ msg: `all InActive Employee Data is...`, data: InactiveData });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ msg: `all InActive Employee Data not found `, err });
+  }
+};
+
 module.exports = {
   userDataByuserId,
   allUserData,
@@ -159,5 +170,5 @@ module.exports = {
   allActiveDataEmployee,
   allInActiveData,
   allInActiveDataUser,
-  allInActiveDataEmployee
+  allInActiveDataEmployee,
 };

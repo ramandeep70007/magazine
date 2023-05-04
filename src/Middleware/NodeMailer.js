@@ -2,6 +2,7 @@ const nodemailer = require("nodemailer");
 const { veryfiemail } = require("../config/dbConnection");
 const { generateOtp } = require("./GenerateOtp");
 
+
 const sendMail = async (req, res) => {
   try {
     const { email } = req.body;
@@ -15,7 +16,7 @@ const Otp = await generateOtp()
       { email: email }
     )
     //console.log('user',user);
-    //console.log("otp", Otp, "email", email);
+  // console.log("otp", Otp, "email", email);
     let transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 587,
@@ -46,6 +47,7 @@ const Otp = await generateOtp()
     console.log(err);
   }
 };
+
 
 module.exports = {
   sendMail,
